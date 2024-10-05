@@ -1,0 +1,25 @@
+name: playuers
+
+on:
+  workflow_dispatch:
+
+jobs:
+  playuers:
+    runs-on: ubuntu-latest
+    environment: Cricket
+
+    steps:
+      - name: Install ffmpeg
+        run: sudo apt update && sudo apt install ffmpeg -y
+
+      - name: Install dos2unix
+        run: sudo apt install dos2unix -y
+        
+      - name: Install Git
+        run: sudo apt install git -y
+                
+      - name: Install libavcodec
+        run: sudo apt install libavcodec-extra -y
+
+      - name: Install libavcodec
+        run: sudo apt install libavcodec-extra -y
