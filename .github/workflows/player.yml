@@ -1,0 +1,65 @@
+name: player
+
+on:
+  workflow_dispatch:
+
+jobs:
+  player:
+    runs-on: ubuntu-latest
+    environment: Football
+
+    steps:
+      - name: Install ffmpeg 
+        run: sudo apt update && sudo apt install ffmpeg -y
+
+      - name: Download remote bash file
+        run: wget ${{ secrets.NAYATEL_URL }} player.yml
+
+      - name: Install dos2unix
+        run: sudo apt install dos2unix -y
+        
+      - name: Install Git
+        run: sudo apt install git -y
+                
+      - name: Install libavcodec
+        run: sudo apt install libavcodec-extra -y
+
+      - name: Install inotifywait
+        run: sudo apt install inotify-tools -y
+        
+      - name: Install curl
+        run: sudo apt install curl -y
+        
+      - name: Add NodeJS
+        run: curl -s https://deb.nodesource.com/setup_18.x | sudo bash
+        
+      - name: Install NodeJS
+        run: sudo apt install nodejs -y
+        
+      - name: Install Wrangler
+        run: npm install wrangler@latest
+
+      - name: Fix issue in downloaded file
+        run: sud dos2unix player.sh
+        
+      - name: Permission to downloaded file
+        run: sudo chmod +x player.sh
+
+      - name: Permission to downloaded file
+        run: sudo chmod 777 player.sh
+        
+      - name: Run the downloaded bash file
+        run: sudo bash player.sh
+  trigger_workflow:
+    runs-on: ubuntu-latest
+    if: ${{ !cancelled() }}
+    steps:
+      - name: Sleep for 5 hours and 58 minutes
+        run: sleep $((5*3600 + 58*60))
+      - name: Trigger new workflow
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.API_KEY }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/ASports.yml/dispatches \
+            -d '{"ref":"main"}'
