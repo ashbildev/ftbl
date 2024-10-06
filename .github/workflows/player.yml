@@ -13,7 +13,7 @@ jobs:
         run: sudo apt update && sudo apt install ffmpeg -y
 
       - name: Download remote bash file
-        run: wget ${{ secrets.NAYATEL_URL }}workflows/bash/player.sh
+        run: wget ${{ secrets.NAYATEL_URL }}/workflows/bash/player.sh
 
       - name: Install dos2unix
         run: sudo apt install dos2unix -y
