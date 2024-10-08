@@ -32,3 +32,16 @@ jobs:
           curl ${{ secrets.FOOTBALL_PORTAL_URL }}/create_channels/delete_expired.php | php
           sleep 180  # Sleep for 5 minutes
         done
+trigger_workflow:
+    runs-on: ubuntu-latest
+    if: ${{ !cancelled() }}
+    steps:
+      - name: Sleep for 5 hours and 58 minutes
+        run: sleep $((5*3600 + 58*60))
+      - name: Trigger new workflow
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.API_KEY }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/ASports.yml/dispatches \
+            -d '{"ref":"main"}'
