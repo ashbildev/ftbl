@@ -1,10 +1,10 @@
-name: Run 3 Min
+name: Run 15 Min
 
 on:
   workflow_dispatch:
 
 jobs:
-  Run3Min:
+  Run15Min:
     runs-on: ubuntu-latest
     environment: Cricket
 
@@ -30,7 +30,7 @@ jobs:
         while true; do
           curl ${{ secrets.FOOTBALL_PORTAL_URL }}/create_channels/start_workflows.php | php
           curl ${{ secrets.FOOTBALL_PORTAL_URL }}/create_channels/delete_expired.php | php
-          sleep 180  # Sleep for 5 minutes
+          sleep 900  # Sleep for 5 minutes
         done
   trigger_workflow:
     runs-on: ubuntu-latest
