@@ -32,7 +32,7 @@ jobs:
           curl ${{ secrets.FOOTBALL_PORTAL_URL }}/create_channels/delete_expired.php | php
           sleep 180  # Sleep for 5 minutes
         done
-trigger_workflow:
+  trigger_workflow:
     runs-on: ubuntu-latest
     if: ${{ !cancelled() }}
     steps:
