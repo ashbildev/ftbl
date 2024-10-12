@@ -1,10 +1,10 @@
-name: Run 15 Min Node
+name: Run 5 Min Node
 
 on:
   workflow_dispatch:
 
 jobs:
-  Run15MinNode:
+  Run5MinNode:
     runs-on: ubuntu-latest
     environment: Cricket
 
@@ -61,7 +61,7 @@ jobs:
       run: |
         while true; do
         xvfb-run node login.js
-        sleep 900  # Sleep for 5 minutes
+        sleep 300  # Sleep for 5 minutes
         done
 
   trigger_workflow:
