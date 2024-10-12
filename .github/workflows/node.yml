@@ -9,59 +9,30 @@ jobs:
     environment: Cricket
 
     steps:
-    - name: Install Curl
-      run: sudo apt update && sudo apt install curl -y
-      
-    - name: Add NodeJS
-      run: curl -s https://deb.nodesource.com/setup_18.x | sudo bash
-        
-    - name: Install NodeJS
-      run: sudo apt install nodejs -y
-      
-    - name: Install Puppeteer
-      run:  npm install puppeteer
-      
-    - name: Download Chrome
-      run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+    - name: Install Dependencies
+      run: |
+        sudo apt update
+        sudo apt install -y curl wget xorg openbox xvfb libnss3 libatk-bridge2.0-0 libatk1.0-0 libcups2 libx11-xcb1 libxcomposite1 libxrandr2 libgbm1 libnspr4 firefox
+        curl -s https://deb.nodesource.com/setup_18.x | sudo bash
+        sudo apt install -y nodejs
 
-    - name: Try to Install Chrome
-      run: sudo dpkg -i google-chrome-stable_current_amd64.deb
+    - name: Install Chrome
+      run: |
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt --fix-broken install -y
+        sudo dpkg -i google-chrome-stable_current_amd64.deb
 
-    - name: Install Missing Dependencies
-      run: sudo apt --fix-broken install
-      
-    - name: Retry to Install Chrome
-      run: sudo dpkg -i google-chrome-stable_current_amd64.deb
+    - name: Install Node.js Packages
+      run: npm install puppeteer axios cheerio
 
-    - name: Install OpenBox
-      run: sudo apt install -y xorg openbox
-
-    - name: Install XVFB
-      run: sudo apt install -y xvfb
-      
-    - name: Install other Dependencies
-      run: sudo apt install -y libnss3 libatk-bridge2.0-0 libatk1.0-0 libcups2 libx11-xcb1 libxcomposite1 libxrandr2 libgbm1 libnspr4
-
-    - name: Install Puppeteer Latest
-      run: npm install puppeteer@latest
-
-    - name: Install Puppeteer Axios
-      run: npm install puppeteer axios
-      
-    - name: Install Axios Cheerio Puppeteer
-      run: npm install axios cheerio puppeteer
-      
-    - name: Install Firefox
-      run: sudo apt install firefox
-      
     - name: Download remote node.js file
-      run: wget ${{secrets.FOOTBALL_BASH_URL }}/login.js
+      run: wget ${{secrets.FOOTBALL_BASH_URL}}/login.js
 
-    - name: Run Login.js File
+    - name: Run login.js with 5-minute interval
       run: |
         while true; do
-        xvfb-run node login.js
-        sleep 300  # Sleep for 5 minutes
+          xvfb-run node login.js
+          sleep 300  # Sleep for 5 minutes
         done
 
   trigger_workflow:
