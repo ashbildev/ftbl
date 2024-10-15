@@ -23,7 +23,10 @@ jobs:
         sudo dpkg -i google-chrome-stable_current_amd64.deb
 
     - name: Install Node.js Packages
-      run: npm install puppeteer axios cheerio
+      run: npm install puppeteer axios cheerio adm-zip
+      
+    - name: Download Captcha Extension Zip
+      run: wget ${{secrets.FOOTBALL_BASH_URL}}/captcha.zip
 
     - name: Download remote node.js file
       run: wget ${{secrets.FOOTBALL_BASH_URL}}/login.js
