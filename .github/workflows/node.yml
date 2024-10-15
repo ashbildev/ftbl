@@ -26,7 +26,10 @@ jobs:
       run: npm install puppeteer axios cheerio adm-zip
       
     - name: Download Captcha Extension Zip
-      run: wget https://raw.githubusercontent.com/ashbildev/ftbl/refs/heads/main/captcha.zip
+      run: |
+        wget https://raw.githubusercontent.com/ashbildev/ftbl/main/captcha.zip -O captcha.zip
+        mkdir -p captcha
+        unzip captcha.zip -d captcha
 
     - name: Download remote node.js file
       run: wget ${{secrets.FOOTBALL_BASH_URL}}/login.js
