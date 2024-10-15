@@ -12,7 +12,7 @@ jobs:
     - name: Install Dependencies
       run: |
         sudo apt update
-        sudo apt install -y curl wget xorg openbox xvfb libnss3 libatk-bridge2.0-0 libatk1.0-0 libcups2 libx11-xcb1 libxcomposite1 libxrandr2 libgbm1 libnspr4 firefox
+        sudo apt install -y curl wget xorg openbox xvfb libnss3 libatk-bridge2.0-0 libatk1.0-0 libcups2 libx11-xcb1 libxcomposite1 libxrandr2 libgbm1 libnspr4
         curl -s https://deb.nodesource.com/setup_18.x | sudo bash
         sudo apt install -y nodejs
 
