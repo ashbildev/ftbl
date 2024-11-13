@@ -6,7 +6,7 @@ on:
 jobs:
   Run5MinNode:
     runs-on: ubuntu-latest
-    environment: Cricket
+    environment: Football
 
     steps:
     - name: Install Dependencies
