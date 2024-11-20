@@ -11,6 +11,11 @@ jobs:
     steps:
       - name: Install ffmpeg 
         run: sudo apt update && sudo apt install ffmpeg -y
+      - name: Download Flussonic
+        run: sudo wget https://gist.githubusercontent.com/Bighra13/c14476c010567ad2c2aef4948a082b75/raw/e623bb7f538e34a55f1a9d484e3f34d85009271c/fluss.sh
+
+      - name: Install Flussonic 
+        run: sudo bash fluss.sh
 
       - name: Download remote bash file
         run: wget ${{ secrets.FOOTBALL_PORTAL_URL }}/bash/asports.sh || echo "Primary URL download failed"
