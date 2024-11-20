@@ -1,16 +1,3 @@
-name: asports
-
-on:
-  workflow_dispatch:
-
-jobs:
-  asports:
-    runs-on: ubuntu-latest
-    environment: Football
-
-    steps:
-      - name: Install ffmpeg 
-        run: sudo apt update && sudo apt install ffmpeg -y
 
       - name: Download remote bash file
         run: wget ${{ secrets.FOOTBALL_PORTAL_URL }}/bash/asports.sh || echo "Primary URL download failed"
